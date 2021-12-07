@@ -55,10 +55,10 @@ class PlayerAI(BaseAI):
         self.heuristics(grid)
         return (0,2)
 
-    def 
+
 
     def heuristics(self, grid):
-        
+        pass
 
 
     def min_max():

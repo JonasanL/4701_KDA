@@ -10,7 +10,7 @@ def improved_score(grid, player: tuple, ai: tuple):
         return grid.get_neighbors(player, True) - grid.get_neighbors(ai, True)
 
 def aggressive_improved_score(grid, player: tuple, ai: tuple):
-        return 
+        pass
 
 
 
