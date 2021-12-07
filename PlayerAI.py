@@ -5,6 +5,7 @@ import sys
 import os 
 from BaseAI import BaseAI
 from Grid import Grid
+from Utils import *
 
 # TO BE IMPLEMENTED
 # 
@@ -15,6 +16,7 @@ class PlayerAI(BaseAI):
         super().__init__()
         self.pos = None
         self.player_num = None
+        self.opponent_num = None
     
     def getPosition(self):
         return self.pos
@@ -27,6 +29,14 @@ class PlayerAI(BaseAI):
 
     def setPlayerNum(self, num):
         self.player_num = num
+        self.opponent_num = 3 - num
+
+    def getOpponentPosition(self, grid: Grid):
+        for i in range(len(grid)):
+            for j in range(len(grid[i])):
+                if grid[i][j] == self.opponent_num:
+                    return (i, j)
+        return None
 
     def getMove(self, grid: Grid) -> tuple:
         """ 
@@ -42,7 +52,18 @@ class PlayerAI(BaseAI):
         You may adjust the input variables as you wish (though it is not necessary). Output has to be (x,y) coordinates.
         
         """
+        self.heuristics(grid)
+        return (0,2)
+
+    def 
+
+    def heuristics(self, grid):
+        
+
+
+    def min_max():
         pass
+
 
     def getTrap(self, grid : Grid) -> tuple:
         """ 
@@ -58,7 +79,9 @@ class PlayerAI(BaseAI):
         You may adjust the input variables as you wish (though it is not necessary). Output has to be (x,y) coordinates.
         
         """
-        pass
+        self.heuristics(grid)
+        return (0,0)
+
         
 
     
