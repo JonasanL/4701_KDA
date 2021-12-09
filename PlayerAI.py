@@ -81,8 +81,19 @@ class PlayerAI(BaseAI):
         """
         position = grid.find(3 - self.player_num)
         nei = grid.get_neighbors(position, True)
-        index = random.randint(0, len(nei) - 1)
-        return nei[index]
+        if nei == 0:
+            return grid.find(0)
+        
+        avilable_move = float('inf')
+        move = (-1, -1)
+        for n in nei:
+            tmp = grid.clone()
+            tmp.setCellValue(n, -1)
+            if len(tmp.get_neighbors(position, True)) < avilable_move:
+                move = n
+
+
+        return move
 
         
 

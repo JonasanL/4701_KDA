@@ -4,10 +4,11 @@ def manhattan_distance(position, target):
         return np.abs(target[0] - position[0]) + np.abs(target[1] - position[1])
 
 def heuristics(grid, player: int, oppnent: int):
+        return improved_score(grid, grid.find(player), grid.find(oppnent))
         return one_cell_look_ahead_score(grid, grid.find(player), grid.find(oppnent))
 
 def improved_score(grid, player: tuple, opponent: tuple):
-        return grid.get_neighbors(player, True) - grid.get_neighbors(ai, True)
+        return len(grid.get_neighbors(player, True)) - len(grid.get_neighbors(opponent, True))
 
 def aggressive_improved_score(grid, player: tuple, oppnent: tuple):
         pass
@@ -31,7 +32,7 @@ def one_cell_look_ahead_score(grid, player: tuple, opponent: tuple):
 
 
 def maximize(state, alpha, beta, level, player):
-        if level == 5:
+        if level == 6:
             return (state, heuristics(state, player, 3 - player))
 
         maxChild = (None, float('-inf'))
@@ -50,8 +51,8 @@ def maximize(state, alpha, beta, level, player):
 
 
 def minimize(state, alpha, beta, level, player):
-        if level == 5:
-            return (state, self.heuristics(state))
+        if level == 6:
+            return (state, heuristics(state, 3 - player, player))
 
         minChild = (None, float('inf'))
 
@@ -83,13 +84,7 @@ def generate_moves_state(state, player):
 
         return states
 
-"""
 
-333 124 3 567
-
-123 1
-
-"""
 
 
 
