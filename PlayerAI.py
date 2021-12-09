@@ -17,6 +17,11 @@ class PlayerAI(BaseAI):
         self.pos = None
         self.player_num = None
         self.opponent_num = None
+        self.moved = True
+        self.traped = True
+
+        self.current_move = None
+        self.current_trap = None
     
     def getPosition(self):
         return self.pos
@@ -52,17 +57,13 @@ class PlayerAI(BaseAI):
         You may adjust the input variables as you wish (though it is not necessary). Output has to be (x,y) coordinates.
         
         """
+        if self.moved and self.traped:
+            state = maximize(grid, float('-inf'), float('inf'), 1, self.player_num)
+            self.traped = False
+            self.current_move = state[0].find(self.player_num)
+            self.current_trap = find_current_trap(grid, state[0])
 
-        state = maximize(grid, float('-inf'), float('inf'), 1, self.player_num)
-        return state[0].find(self.player_num)
-        
-
-
-
-
-
-    def heuristics_move(self, grid):
-        pass
+        return self.current_move
 
 
     def getTrap(self, grid : Grid) -> tuple:
@@ -79,21 +80,9 @@ class PlayerAI(BaseAI):
         You may adjust the input variables as you wish (though it is not necessary). Output has to be (x,y) coordinates.
         
         """
-        position = grid.find(3 - self.player_num)
-        nei = grid.get_neighbors(position, True)
-        if nei == 0:
-            return grid.find(0)
-        
-        avilable_move = float('inf')
-        move = (-1, -1)
-        for n in nei:
-            tmp = grid.clone()
-            tmp.setCellValue(n, -1)
-            if len(tmp.get_neighbors(position, True)) < avilable_move:
-                move = n
-
-
-        return move
+        if self.traped == False:
+            self.traped = True
+            return self.current_trap
 
         
 
