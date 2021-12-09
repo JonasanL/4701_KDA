@@ -52,16 +52,16 @@ class PlayerAI(BaseAI):
         You may adjust the input variables as you wish (though it is not necessary). Output has to be (x,y) coordinates.
         
         """
-        self.heuristics(grid)
-        return (0,2)
+
+        state = maximize(grid, float('-inf'), float('inf'), 1, self.player_num)
+        return state[0].find(self.player_num)
+        
 
 
 
-    def heuristics(self, grid):
-        pass
 
 
-    def min_max():
+    def heuristics_move(self, grid):
         pass
 
 
@@ -79,8 +79,10 @@ class PlayerAI(BaseAI):
         You may adjust the input variables as you wish (though it is not necessary). Output has to be (x,y) coordinates.
         
         """
-        self.heuristics(grid)
-        return (0,0)
+        position = grid.find(3 - self.player_num)
+        nei = grid.get_neighbors(position, True)
+        index = random.randint(0, len(nei) - 1)
+        return nei[index]
 
         
 
