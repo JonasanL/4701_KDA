@@ -81,6 +81,10 @@ class PlayerAI(BaseAI):
         
         """
         if self.traped == False:
+            # if game.play()==1:
+            #     self.traped = True
+            #     return 
+            # else:
             self.traped = True
             return self.current_trap
 

@@ -9,22 +9,36 @@ def heuristics(grid, player: int, opponent: int):
 
         if len(grid.get_neighbors(opponent_position, True)) == 0:
                 return 1000000
+        if 25>len(grid.getAvailableCells()) > 10:
+        # if one_cell_look_ahead_score(grid,grid.find(player), grid.find(opponent))>0:
+                return passive_improved_score(grid, player_position, opponent_position)
+        else:
+                return aggressive_improved_score(grid, player_position, opponent_position)
 
-        return improved_score(grid, player_position, opponent_position)
-        return one_cell_look_ahead_score(grid, grid.find(player), grid.find(oppnent))
+        # return improved_score(grid, player_position, opponent_position)
+        # return one_cell_look_ahead_score(grid, grid.find(player), grid.find(opponent))
 
 def improved_score(grid, player: tuple, opponent: tuple):
         return len(grid.get_neighbors(player, True)) - len(grid.get_neighbors(opponent, True))
 
-def aggressive_improved_score(grid, player: tuple, oppnent: tuple):
-        pass
+def aggressive_improved_score(grid, player: tuple, opponent: tuple):
+        return len(grid.get_neighbors(player, True))*2 - len(grid.get_neighbors(opponent, True))
 
+def passive_improved_score(grid, player: tuple, opponent: tuple):
+        return len(grid.get_neighbors(player, True)) - len(grid.get_neighbors(opponent, True))*2
 
 def find_current_trap(origin, new):
         for i in range(7):
                 for j in range(7):
                         if new.getCellValue((i,j)) == -1 and origin.getCellValue((i,j)) == 0:
                                 return (i, j)
+        # return origin.get_neighbors(player, True)[0]
+
+# def find_backup_trap(origin):
+        for i in range(7):
+                for j in range(7):
+                        if origin.getCellValue((i,j))==0:
+                                return (i,j)
 
 
 def one_cell_look_ahead_score(grid, player: tuple, opponent: tuple):
