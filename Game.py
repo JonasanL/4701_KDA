@@ -5,6 +5,7 @@ from Displayer import Displayer
 from PlayerAI import PlayerAI
 from test_players.EasyAI import EasyAI
 from test_players.MediumAI import MediumAI
+from test_players.dummyAI import dummyAI
 from Utils import *
 import time
 

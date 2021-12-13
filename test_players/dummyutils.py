@@ -7,15 +7,15 @@ def heuristics(grid, player: int, opponent: int):
         player_position = grid.find(player)
         opponent_position = grid.find(opponent)
 
-        if len(grid.get_neighbors(opponent_position, True)) == 0:
-                return 1000000
-        # if 35>len(grid.getAvailableCells()) > 10:
-        # if one_cell_look_ahead_score(grid,grid.find(player), grid.find(opponent))>0:
+        # if len(grid.get_neighbors(opponent_position, True)) == 0:
+        #         return 1000000
+        # if 25>len(grid.getAvailableCells()) > 10:
+        # # if one_cell_look_ahead_score(grid,grid.find(player), grid.find(opponent))>0:
         #         return passive_improved_score(grid, player_position, opponent_position)
         # else:
         #         return aggressive_improved_score(grid, player_position, opponent_position)
 
-        return improved_score(grid, player_position, opponent_position)
+        return aggressive_improved_score(grid, player_position, opponent_position)
         # return one_cell_look_ahead_score(grid, grid.find(player), grid.find(opponent))
 
 def improved_score(grid, player: tuple, opponent: tuple):
